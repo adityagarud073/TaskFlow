@@ -18,12 +18,7 @@ function RegisterPage() {
     setLoading(true);
 
     try {
-      await api.post('/auth/register', {
-        fullName,
-        email,
-        password,
-        role,
-      });
+      await api.post('/auth/register', { fullName, email, password, role });
       alert('Registration successful! Please login.');
       navigate('/login');
     } catch (err: any) {
@@ -34,66 +29,98 @@ function RegisterPage() {
   };
 
   return (
-    <div className="row justify-content-center mt-5">
-      <div className="col-md-5">
-        <div className="card shadow-sm p-4">
-          <h3 className="text-center mb-3">Create Account</h3>
+    <div className="row justify-content-center align-items-center py-4">
+      <div className="col-12 col-sm-9 col-md-7 col-lg-5">
+        <div className="card border-0 shadow rounded-4 p-4">
+          <div className="text-center mb-4">
+            <span className="badge bg-success-subtle text-success rounded-pill px-3 py-2 mb-2">
+              Get Started
+            </span>
+            <h3 className="fw-bold mb-1">Create Account</h3>
+            <p className="text-muted small mb-0">
+              Join TaskFlow to track work effortlessly
+            </p>
+          </div>
 
-          {error && <div className="alert alert-danger">{error}</div>}
+          {error && (
+            <div className="alert alert-danger py-2 small rounded-3">
+              {error}
+            </div>
+          )}
 
           <form onSubmit={handleSubmit}>
-            <div className="mb-3">
-              <label className="form-label">Full Name</label>
+            <div className="form-floating mb-3">
               <input
                 type="text"
-                className="form-control"
+                className="form-control rounded-3"
+                id="regName"
+                placeholder="Aditya Garud"
                 value={fullName}
                 onChange={(e) => setFullName(e.target.value)}
                 required
               />
+              <label htmlFor="regName">Full Name</label>
             </div>
-            <div className="mb-3">
-              <label className="form-label">Email</label>
+
+            <div className="form-floating mb-3">
               <input
                 type="email"
-                className="form-control"
+                className="form-control rounded-3"
+                id="regEmail"
+                placeholder="name@example.com"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
               />
+              <label htmlFor="regEmail">Email Address</label>
             </div>
-            <div className="mb-3">
-              <label className="form-label">Password</label>
-              <input
-                type="password"
-                className="form-control"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                minLength={6}
-                required
-              />
+
+            <div className="row g-2 mb-4">
+              <div className="col-12 col-sm-7">
+                <div className="form-floating">
+                  <input
+                    type="password"
+                    className="form-control rounded-3"
+                    id="regPassword"
+                    placeholder="Password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    minLength={6}
+                    required
+                  />
+                  <label htmlFor="regPassword">Password (Min 6)</label>
+                </div>
+              </div>
+              <div className="col-12 col-sm-5">
+                <div className="form-floating">
+                  <select
+                    className="form-select rounded-3"
+                    id="regRole"
+                    value={role}
+                    onChange={(e) => setRole(e.target.value)}
+                  >
+                    <option value="User">User</option>
+                    <option value="Admin">Admin</option>
+                  </select>
+                  <label htmlFor="regRole">Role</label>
+                </div>
+              </div>
             </div>
-            <div className="mb-3">
-              <label className="form-label">Role</label>
-              <select
-                className="form-select"
-                value={role}
-                onChange={(e) => setRole(e.target.value)}
-              >
-                <option value="User">User</option>
-                <option value="Admin">Admin</option>
-              </select>
-            </div>
+
             <button
               type="submit"
-              className="btn btn-success w-100"
+              className="btn btn-success btn-lg w-100 rounded-3 fw-semibold fs-6 shadow-sm"
               disabled={loading}
             >
-              {loading ? 'Registering...' : 'Register'}
+              {loading ? 'Creating Account...' : 'Register'}
             </button>
           </form>
-          <p className="text-center mt-3 mb-0">
-            Already have an account? <Link to="/login">Login here</Link>
+
+          <p className="text-center text-muted small mt-4 mb-0">
+            Already have an account?{' '}
+            <Link to="/login" className="text-decoration-none fw-semibold">
+              Sign in here
+            </Link>
           </p>
         </div>
       </div>

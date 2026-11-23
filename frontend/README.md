@@ -1,75 +1,37 @@
-# React + TypeScript + Vite
+# TaskFlow – Full Stack Task Management System
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+TaskFlow is a role-based full-stack Task Management web application built with **ASP.NET Core Web API (.NET 10 LTS)**, **PostgreSQL**, and **React + TypeScript**.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+### Authentication & Security
+- User Registration & Login with **BCrypt** password hashing
+- **JWT (JSON Web Token)** authentication
+- **Role-Based Access Control (RBAC)** for `Admin` and `User`
+- Global Exception Handling middleware and DTO input validation
 
-## React Compiler
+### Admin Capabilities
+- View all registered users
+- Create, assign, and delete tasks
+- Monitor task progress across all users
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### User Capabilities
+- View personally assigned tasks
+- Update task status (`Pending`, `InProgress`, `Completed`)
 
-## Expanding the ESLint configuration
+### Frontend
+- Built with **React**, **TypeScript**, and **Bootstrap 5**
+- Fully responsive, mobile-first card layout with summary KPIs, search, and status filters
+- Protected routes and Axios request interceptors for automatic JWT attachment
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Tech Stack
+- **Backend:** C#, ASP.NET Core Web API (.NET 10 LTS), Entity Framework Core, LINQ
+- **Database:** PostgreSQL, Npgsql
+- **Frontend:** React.js, TypeScript, Bootstrap 5, Axios, React Router DOM
+- **Tools:** Visual Studio 2026, VS Code, pgAdmin 4, Git & GitHub
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-
-```
-
-You can also install [eslint-plugin-react-x](https://npmx.dev/package/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://npmx.dev/package/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-
-```
+## Project Structure
+```text
+TaskFlow/
+├── backend/TaskFlow.API/   # ASP.NET Core Web API, EF Core, JWT Auth
+└── frontend/               # React + TypeScript + Bootstrap UI
